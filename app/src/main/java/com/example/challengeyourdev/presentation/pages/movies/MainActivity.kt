@@ -1,7 +1,8 @@
-package com.example.challengeyourdev
+package com.example.challengeyourdev.presentation.pages.movies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.challengeyourdev.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
