@@ -3,22 +3,33 @@ package com.example.challengeyourdev.presentation.pages.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.challengeyourdev.core.utils.Response
+import com.example.challengeyourdev.domain.usecases.GetAllMovies
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-//criado por balanike
+//criado por arthur rodrigues
 
-class MoviesViewModel : ViewModel() {
+class MoviesViewModel(
+    val getAllMovies: GetAllMovies
+) : ViewModel() {
 
     private val response = MutableLiveData<Response>()
 
 
     fun getMovies(){
-        CoroutineScope(Dispatchers.IO).launch {
+        try {
+            CoroutineScope(Dispatchers.IO).launch {
+                val result = getAllMovies()
+                response.postValue(Response.success(result))
+            }
 
         }
+        catch (t : Throwable){
+
+        }
+
     }
 
     fun response(): MutableLiveData<Response> {
