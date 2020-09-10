@@ -1,7 +1,7 @@
 package com.example.challengeyourdev.domain.repositories
 
 
-//criado por balanike
+//criado por arthur rodrigues
 
 interface MovieRepository {
 
