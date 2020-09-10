@@ -6,14 +6,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //criado por arthur rodrigues
 
-class RestApi {
+object RestApi {
 
-    private val retrofit : Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.nytimes.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .build()
+    private val retrofit : Retrofit
+    fun getRetrofit() = retrofit
 
-    fun getApiService() = retrofit.create(ApiService::class.java)
+    init {
+      retrofit = Retrofit.Builder()
+            .baseUrl("https://api.nytimes.com/svc/movies/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+    }
+
 
 }
