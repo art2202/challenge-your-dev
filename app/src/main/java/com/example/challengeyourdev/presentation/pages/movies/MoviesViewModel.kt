@@ -16,13 +16,14 @@ class MoviesViewModel(
 ) : ViewModel() {
 
     private val response = MutableLiveData<Response>()
+    private var currentPage = 0
 
 
     fun getMovies(){
         response.postValue(Response.loading())
         try {
             CoroutineScope(Dispatchers.IO).launch {
-                val result = getAllMovies()
+                val result = getAllMovies(currentPage)
                 response.postValue(Response.success(result))
             }
 
@@ -31,6 +32,11 @@ class MoviesViewModel(
             response.postValue(Response.error(t))
         }
 
+    }
+
+    fun loadMoreMovies(){
+        currentPage += 20
+        getMovies()
     }
 
     fun response(): MutableLiveData<Response> {

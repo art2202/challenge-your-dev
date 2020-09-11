@@ -11,6 +11,7 @@ import com.example.challengeyourdev.R
 import com.example.challengeyourdev.core.utils.Response
 import com.example.challengeyourdev.core.utils.Status
 import com.example.challengeyourdev.domain.entities.Movie
+import com.example.challengeyourdev.presentation.widgets.InfiniteScrollListener
 import kotlinx.android.synthetic.main.activity_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,7 +50,15 @@ class MoviesActivity : AppCompatActivity() {
                 moviesAdapter = MoviesAdapter(data as ArrayList<Movie>)
                 val layoutManager = GridLayoutManager(this, 2)
                 rv_movies.layoutManager = layoutManager
+                rv_movies.addOnScrollListener(
+                    InfiniteScrollListener({
+                        viewModel.loadMoreMovies()
+                    }, layoutManager)
+                )
                 rv_movies.adapter = moviesAdapter
+            }
+            else{
+                moviesAdapter?.addItems(data as ArrayList<Movie>)
             }
         }
     }

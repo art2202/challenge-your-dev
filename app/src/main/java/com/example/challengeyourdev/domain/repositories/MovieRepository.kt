@@ -7,5 +7,5 @@ import com.example.challengeyourdev.domain.entities.Movie
 
 interface MovieRepository {
 
-    suspend fun getAllMovies() : List<Movie>
+    suspend fun getAllMovies(page: Int): List<Movie>
 }

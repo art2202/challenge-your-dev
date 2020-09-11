@@ -1,6 +1,5 @@
 package com.example.challengeyourdev.data.data_sources
 
-import com.example.challengeyourdev.data.models.MovieDataResponse
 import com.example.challengeyourdev.data.models.ResultApiDataResponse
 
 
@@ -8,5 +7,5 @@ import com.example.challengeyourdev.data.models.ResultApiDataResponse
 
 interface MovieRemoteDataSource {
 
-    suspend fun getAllMovies() : ResultApiDataResponse
+    suspend fun getAllMovies(page: Int): ResultApiDataResponse
 }
