@@ -9,8 +9,8 @@ class Movie(
     val criticTitle : String,
     val summaryShort : String,
     val publicationDate : String,
-    val criticUrl : String,
-    val photoUrl : String
+    val link : Link,
+    val photo : Photo
 ){
 
     var isFavorite : Boolean = false

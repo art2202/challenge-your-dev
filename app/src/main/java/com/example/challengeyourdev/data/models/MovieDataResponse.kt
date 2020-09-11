@@ -1,6 +1,8 @@
 package com.example.challengeyourdev.data.models
 
+import com.example.challengeyourdev.domain.entities.Link
 import com.example.challengeyourdev.domain.entities.Movie
+import com.example.challengeyourdev.domain.entities.Photo
 
 
 //criado por arthur rodrigues
@@ -24,8 +26,8 @@ class MovieDataResponse(
             headline ?: "",
             summary_short ?: "",
             publication_date ?: "",
-            link?.url ?: "",
-            multimedia?.src ?: ""
+            link?.toEntity() ?: Link("", "", "") ,
+            multimedia?.toEntity() ?: Photo("", "", 0, 0)
         )
     }
 }
