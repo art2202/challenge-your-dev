@@ -26,7 +26,7 @@ class MoviesAdapter(private var listMovies : ArrayList<Movie>) : RecyclerView.Ad
         val item = listMovies[position]
 
         holder.itemView.tv_title.text = item.movieTitle
-        Picasso.get().load(item.photoUrl).into(holder.itemView.iv_picture)
+        Picasso.get().load(item.photo.photoUrl).into(holder.itemView.iv_picture)
 
     }
 
