@@ -15,4 +15,7 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie")
     fun getAllMovies() : List<MovieEntity>
+
+    @Query("SELECT * FROM movie WHERE critic_title LIKE :substring")
+    fun getMovies(substring : String) : List<MovieEntity>
 }
