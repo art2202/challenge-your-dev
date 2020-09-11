@@ -1,5 +1,7 @@
 package com.example.challengeyourdev.data.models
 
+import com.example.challengeyourdev.domain.entities.Movie
+
 
 //criado por arthur rodrigues
 
@@ -14,4 +16,16 @@ class MovieDataResponse(
     val date_update : String?,
     val link : LinkDataResponse?,
     val multimedia : PhotoDataResponse?
-) 
+){
+    fun toEntity() : Movie {
+        return Movie(
+            display_title ?: "",
+            byline ?: "",
+            headline ?: "",
+            summary_short ?: "",
+            publication_date ?: "",
+            link?.url ?: "",
+            multimedia?.src ?: ""
+        )
+    }
+}

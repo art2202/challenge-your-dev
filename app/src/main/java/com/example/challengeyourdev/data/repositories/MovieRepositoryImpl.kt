@@ -10,7 +10,9 @@ import com.example.challengeyourdev.domain.repositories.MovieRepository
 class MovieRepositoryImpl(private val remoteDataSource: MovieRemoteDataSource) : MovieRepository {
 
     override suspend fun getAllMovies(): List<Movie> {
-        val movieList = remoteDataSource.getAllMovies()
-        return listOf()
+        val movieList = remoteDataSource.getAllMovies().result.map { it.toEntity() }
+
+        return movieList
+
     }
 }

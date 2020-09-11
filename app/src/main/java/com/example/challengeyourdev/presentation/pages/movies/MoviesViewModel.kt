@@ -19,6 +19,7 @@ class MoviesViewModel(
 
 
     fun getMovies(){
+        response.postValue(Response.loading())
         try {
             CoroutineScope(Dispatchers.IO).launch {
                 val result = getAllMovies()
@@ -27,7 +28,7 @@ class MoviesViewModel(
 
         }
         catch (t : Throwable){
-
+            response.postValue(Response.error(t))
         }
 
     }
