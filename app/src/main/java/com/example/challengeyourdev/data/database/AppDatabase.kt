@@ -4,7 +4,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.challengeyourdev.core.App
+import com.example.challengeyourdev.data.database.entity.LinkEntity
+import com.example.challengeyourdev.data.database.entity.MovieEntity
+import com.example.challengeyourdev.data.database.entity.PhotoEntity
 
+
+@Database(
+    entities = [
+        LinkEntity::class,
+        PhotoEntity::class,
+        MovieEntity::class
+    ],
+    version = 1,
+    exportSchema = false
+)
 
 abstract class AppDatabase : RoomDatabase() {
 
