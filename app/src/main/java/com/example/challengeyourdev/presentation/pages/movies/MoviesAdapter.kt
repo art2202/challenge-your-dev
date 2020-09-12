@@ -27,6 +27,7 @@ class MoviesAdapter(
 
         val item = listMovies[position]
 
+
         holder.itemView.tv_title.text = item.movieTitle
         Picasso.get().load(item.photo.photoUrl).into(holder.itemView.iv_picture)
 
@@ -38,9 +39,9 @@ class MoviesAdapter(
 
         holder.itemView.iv_fav.setImageResource(
             if (item.isFavorite)
-                R.drawable.ic_star_primary_24dp
+                R.drawable.ic_star_accent_24dp
             else
-                R.drawable.ic_star_border_primary_24dp
+                R.drawable.ic_star_border_accent_24dp
         )
 
     }

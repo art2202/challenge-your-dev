@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengeyourdev.R
 import com.example.challengeyourdev.core.utils.Response
 import com.example.challengeyourdev.core.utils.Status
@@ -19,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class FavoriteMoviesActivity : AppCompatActivity() {
 
     private val viewModel : FavoriteMoviesViewModel by viewModel()
-    private var moviesAdapter: MoviesAdapter? = null
+    private var moviesAdapter: FavoriteMoviesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +47,10 @@ class FavoriteMoviesActivity : AppCompatActivity() {
             val listOrder = arrayListOf<Movie>()
             listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
             if(moviesAdapter == null){
-                moviesAdapter = MoviesAdapter(listOrder, ::onFavoriteClick)
-                val layoutManager = GridLayoutManager(this, 2)
+                moviesAdapter = FavoriteMoviesAdapter(listOrder, ::onFavoriteClick)
+                val layoutManager = LinearLayoutManager(this)
                 rv_movies.layoutManager = layoutManager
                 rv_movies.adapter = moviesAdapter
-            }
-            else{
-                moviesAdapter?.setList(data as ArrayList<Movie>)
             }
         }
     }
