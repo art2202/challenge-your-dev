@@ -14,9 +14,16 @@ class MovieLocalDataSourceImpl() : MovieLocalDataSource {
         movieDao.add(movies)
     }
 
+    override suspend fun addMovieFavorite(movie: MovieEntity) {
+        movieDao.addOneMovie(movie)
+    }
+
     override suspend fun getAllMovies(): List<MovieEntity> {
         return movieDao.getAllMovies()
-
-
     }
+
+    override suspend fun getFavoriteMovies(): List<MovieEntity>? {
+        return movieDao.getFavoriteMovies()
+    }
+
 }

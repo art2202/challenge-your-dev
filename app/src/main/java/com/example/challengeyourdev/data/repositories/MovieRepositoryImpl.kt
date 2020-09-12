@@ -20,15 +20,32 @@ class MovieRepositoryImpl(
 ) : MovieRepository {
 
     override suspend fun getAllMovies(page: Int): List<Movie> {
-        val movieList = remoteDataSource.getAllMovies(page).results.map { movieDataResponseToMovieMapper.map(it) }
-        movieList.size
-        saveInDataBase(movieList)
-        val a = localDataSource.getAllMovies().map { movieEntityToMovieMapper.map(it) }
-        a.size
-        return a
+        val movieListLocal = localDataSource.getAllMovies()
+        if(movieListLocal.isEmpty() || page > 0){
+            val movieList = remoteDataSource.getAllMovies(page).results.map { movieDataResponseToMovieMapper.map(it) }
+            saveInDataBase(movieList)
+        }
+        return localDataSource.getAllMovies().map { movieEntityToMovieMapper.map(it) }
     }
 
     override suspend fun saveInDataBase(movies: List<Movie>) {
         localDataSource.addAllMovies(movies.map{movieToMovieEntityMapper.map(it)})
+    }
+
+    override suspend fun favoriteOrDisfavorMovie(movie: Movie) {
+        val favoriteMovies = (localDataSource.getFavoriteMovies()?.map{
+            movieEntityToMovieMapper.map(it)} ?: arrayListOf()) as ArrayList<Movie>
+
+        if(favoriteMovies.find { movie.movieTitle == it.movieTitle } == null){
+            println("null")
+            movie.isFavorite = true
+            localDataSource.addMovieFavorite(movieToMovieEntityMapper.map(movie))
+        }
+        else {
+            println("nao null")
+            movie.isFavorite = false
+            localDataSource.addMovieFavorite(movieToMovieEntityMapper.map(movie))
+        }
+
     }
 }

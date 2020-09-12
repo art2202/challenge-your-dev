@@ -13,9 +13,9 @@ import androidx.room.PrimaryKey
 )
 data class MovieEntity(
 
-    @PrimaryKey(autoGenerate = true)
     val id : Int?,
 
+    @PrimaryKey
     @ColumnInfo(name = "movie_title")
     val movieTitle : String,
 
@@ -44,5 +44,8 @@ data class MovieEntity(
     val criticLink : String,
 
     @ColumnInfo(name = "suggested_text")
-    val suggestedText : String
+    val suggestedText : String,
+
+    @ColumnInfo(name = "favorite")
+    val isFavorite : Boolean
 )

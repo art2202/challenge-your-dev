@@ -45,8 +45,11 @@ class MoviesActivity : AppCompatActivity() {
         rv_movies.visibility = View.VISIBLE
 
         if(data is List<*>){
+            data.size
+            val listOrder = arrayListOf<Movie>()
+            listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
             if(moviesAdapter == null){
-                moviesAdapter = MoviesAdapter(data as ArrayList<Movie>)
+                moviesAdapter = MoviesAdapter(listOrder, ::onFavoriteClick)
                 val layoutManager = GridLayoutManager(this, 2)
                 rv_movies.layoutManager = layoutManager
                 rv_movies.addOnScrollListener(
@@ -78,5 +81,8 @@ class MoviesActivity : AppCompatActivity() {
             rv_movies.visibility = View.GONE
             ll_error.visibility = View.GONE
         }
+    }
+    private fun onFavoriteClick(movie: Movie) {
+        viewModel.favoriteOrDisfavorMovie(movie)
     }
 }

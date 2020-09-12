@@ -19,7 +19,8 @@ class MovieToMovieEntityMapper : Mapper<Movie, MovieEntity> {
             photo.width,
             photo.height,
             link.criticUrl,
-            link.suggestedText
+            link.suggestedText,
+            isFavorite
         )
     }
 }

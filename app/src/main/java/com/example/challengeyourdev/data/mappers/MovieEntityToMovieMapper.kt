@@ -18,6 +18,6 @@ class MovieEntityToMovieMapper : Mapper<MovieEntity, Movie> {
             publicationDate,
             Link("", criticLink, suggestedText),
             Photo("", photoUrl, photoWidth, photoHeight)
-        )
+        ).apply { isFavorite = input.isFavorite }
     }
 }
