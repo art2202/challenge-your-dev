@@ -9,6 +9,7 @@ interface MovieRepository {
 
     suspend fun getAllMovies(page: Int): List<Movie>
     suspend fun saveInDataBase(movies : List<Movie>)
+    suspend fun getFavoriteMovies() : List<Movie>
     suspend fun favoriteOrDisfavorMovie(movie: Movie)
 
 }

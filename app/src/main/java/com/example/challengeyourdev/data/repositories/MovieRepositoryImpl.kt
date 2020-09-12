@@ -32,6 +32,10 @@ class MovieRepositoryImpl(
         localDataSource.addAllMovies(movies.map{movieToMovieEntityMapper.map(it)})
     }
 
+    override suspend fun getFavoriteMovies(): List<Movie> {
+        return localDataSource.getFavoriteMovies()?.map { movieEntityToMovieMapper.map(it) } ?: listOf()
+    }
+
     override suspend fun favoriteOrDisfavorMovie(movie: Movie) {
         val favoriteMovies = (localDataSource.getFavoriteMovies()?.map{
             movieEntityToMovieMapper.map(it)} ?: arrayListOf()) as ArrayList<Movie>
