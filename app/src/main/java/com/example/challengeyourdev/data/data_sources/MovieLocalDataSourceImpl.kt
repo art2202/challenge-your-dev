@@ -2,20 +2,21 @@ package com.example.challengeyourdev.data.data_sources
 
 import com.example.challengeyourdev.data.database.AppDatabase
 import com.example.challengeyourdev.data.database.entity.MovieEntity
-import com.example.challengeyourdev.domain.entities.Movie
 
 
 //criado por arthur rodrigues
 
-class MovieLocalDataSourceImpl : MovieLocalDataSource {
+class MovieLocalDataSourceImpl() : MovieLocalDataSource {
 
     private val movieDao = AppDatabase.getDatabase()!!.movieDao()
 
-    override suspend fun addAllMovies(movies: List<Movie>) {
-        TODO("Not yet implemented")
+    override suspend fun addAllMovies(movies: List<MovieEntity>) {
+        movieDao.add(movies)
     }
 
     override suspend fun getAllMovies(): List<MovieEntity> {
-        TODO("Not yet implemented")
+        return movieDao.getAllMovies()
+
+
     }
 }

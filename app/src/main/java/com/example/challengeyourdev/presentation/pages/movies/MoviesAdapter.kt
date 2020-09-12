@@ -30,8 +30,8 @@ class MoviesAdapter(private var listMovies : ArrayList<Movie>) : RecyclerView.Ad
 
     }
 
-    fun addItems(list: ArrayList<Movie>) {
-        this.listMovies.addAll(list)
+    fun setList(list:ArrayList<Movie>){
+        this.listMovies = list
         notifyDataSetChanged()
     }
 

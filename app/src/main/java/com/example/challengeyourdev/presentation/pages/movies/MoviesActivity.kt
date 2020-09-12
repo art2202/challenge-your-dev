@@ -57,7 +57,7 @@ class MoviesActivity : AppCompatActivity() {
                 rv_movies.adapter = moviesAdapter
             }
             else{
-                moviesAdapter?.addItems(data as ArrayList<Movie>)
+                moviesAdapter?.setList(data as ArrayList<Movie>)
             }
         }
     }

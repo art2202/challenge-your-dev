@@ -18,9 +18,7 @@ import com.example.challengeyourdev.data.database.entity.MovieEntity
 abstract class AppDatabase : RoomDatabase() {
 
 
-//    abstract fun linkDao() : LinkDao
     abstract fun movieDao() : MovieDao
-//    abstract fun photoDao() : PhotoDao
 
     companion object {
         @Volatile

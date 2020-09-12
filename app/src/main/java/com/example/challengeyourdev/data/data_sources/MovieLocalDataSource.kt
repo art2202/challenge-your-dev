@@ -8,6 +8,6 @@ import com.example.challengeyourdev.domain.entities.Movie
 
 interface MovieLocalDataSource {
 
-    suspend fun addAllMovies(movies : List<Movie>)
+    suspend fun addAllMovies(movies : List<MovieEntity>)
     suspend fun getAllMovies() : List<MovieEntity>
 }
