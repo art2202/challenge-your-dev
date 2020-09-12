@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".presentation.pages.movie_detail.MovieDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".presentation.pages.favorite_movies.FavoriteMoviesActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 

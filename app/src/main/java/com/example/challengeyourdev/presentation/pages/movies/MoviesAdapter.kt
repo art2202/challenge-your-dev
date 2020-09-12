@@ -1,11 +1,14 @@
 package com.example.challengeyourdev.presentation.pages.movies
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challengeyourdev.R
 import com.example.challengeyourdev.domain.entities.Movie
+import com.example.challengeyourdev.presentation.pages.movie_detail.MovieDetailActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie.view.*
 
@@ -13,6 +16,7 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 //criado por arthur rodrigues
 
 class MoviesAdapter(
+    private val activity : Activity,
     private var listMovies : ArrayList<Movie>,
     private val onFavoriteClick :(movie : Movie) -> Unit) : RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
 
@@ -36,6 +40,11 @@ class MoviesAdapter(
             notifyDataSetChanged()
         }
 
+        holder.itemView.cr_layout.setOnClickListener {
+            val intent = Intent(activity.applicationContext, MovieDetailActivity::class.java)
+            intent.putExtra("movie", item)
+            activity.startActivity(intent)
+        }
 
         holder.itemView.iv_fav.setImageResource(
             if (item.isFavorite)

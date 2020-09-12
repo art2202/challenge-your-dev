@@ -56,7 +56,7 @@ class MoviesActivity : AppCompatActivity() {
             val listOrder = arrayListOf<Movie>()
             listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
             if(moviesAdapter == null){
-                moviesAdapter = MoviesAdapter(listOrder, ::onFavoriteClick)
+                moviesAdapter = MoviesAdapter(this, listOrder, ::onFavoriteClick)
                 val layoutManager = GridLayoutManager(this, 2)
                 rv_movies.layoutManager = layoutManager
                 rv_movies.addOnScrollListener(
@@ -67,7 +67,7 @@ class MoviesActivity : AppCompatActivity() {
                 rv_movies.adapter = moviesAdapter
             }
             else{
-                moviesAdapter?.setList(data as ArrayList<Movie>)
+                moviesAdapter?.setList(data)
             }
         }
     }
