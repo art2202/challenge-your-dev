@@ -1,6 +1,5 @@
-package com.example.challengeyourdev.presentation.pages.movies
+package com.example.challengeyourdev.presentation.pages.favorite_movies
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,31 +10,23 @@ import com.example.challengeyourdev.R
 import com.example.challengeyourdev.core.utils.Response
 import com.example.challengeyourdev.core.utils.Status
 import com.example.challengeyourdev.domain.entities.Movie
-import com.example.challengeyourdev.presentation.pages.favorite_movies.FavoriteMoviesActivity
+import com.example.challengeyourdev.presentation.pages.movies.MoviesAdapter
 import com.example.challengeyourdev.presentation.widgets.InfiniteScrollListener
 import kotlinx.android.synthetic.main.activity_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//criado por arthur rodrigues
-
 @Suppress("UNCHECKED_CAST")
-class MoviesActivity : AppCompatActivity() {
+class FavoriteMoviesActivity : AppCompatActivity() {
 
-    private val viewModel : MoviesViewModel by viewModel()
+    private val viewModel : FavoriteMoviesViewModel by viewModel()
     private var moviesAdapter: MoviesAdapter? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movies)
+        setContentView(R.layout.activity_favorite_movies)
 
         viewModel.response().observe(this, Observer { response -> processResponse(response) })
-        viewModel.getMovies()
-
-        ic_bookmark.setOnClickListener {
-            intent = Intent(this, FavoriteMoviesActivity::class.java)
-            startActivity(intent)
-        }
+        viewModel.getFavoriteMovies()
     }
 
     private fun processResponse(response : Response){
@@ -45,7 +36,6 @@ class MoviesActivity : AppCompatActivity() {
             Status.ERROR -> showError(response.error)
         }
     }
-
     private fun showMovies(data : Any?) {
 
         pg_loading.visibility = View.GONE
@@ -59,11 +49,6 @@ class MoviesActivity : AppCompatActivity() {
                 moviesAdapter = MoviesAdapter(listOrder, ::onFavoriteClick)
                 val layoutManager = GridLayoutManager(this, 2)
                 rv_movies.layoutManager = layoutManager
-                rv_movies.addOnScrollListener(
-                    InfiniteScrollListener({
-                        viewModel.loadMoreMovies()
-                    }, layoutManager)
-                )
                 rv_movies.adapter = moviesAdapter
             }
             else{
@@ -89,6 +74,7 @@ class MoviesActivity : AppCompatActivity() {
             ll_error.visibility = View.GONE
         }
     }
+
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)
     }

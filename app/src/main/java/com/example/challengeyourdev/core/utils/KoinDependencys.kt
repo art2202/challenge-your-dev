@@ -13,6 +13,8 @@ import com.example.challengeyourdev.data.repositories.MovieRepositoryImpl
 import com.example.challengeyourdev.domain.repositories.MovieRepository
 import com.example.challengeyourdev.domain.usecases.FavoriteOrDisfavorMovie
 import com.example.challengeyourdev.domain.usecases.GetAllMovies
+import com.example.challengeyourdev.domain.usecases.GetFavoriteMovies
+import com.example.challengeyourdev.presentation.pages.favorite_movies.FavoriteMoviesViewModel
 import com.example.challengeyourdev.presentation.pages.movies.MoviesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,6 +32,7 @@ val modules = module {
 //    single { MovieRepositoryImpl(get(), get(), get(), get(), get()) }
     single { GetAllMovies(get()) }
     single { FavoriteOrDisfavorMovie(get())}
+    single {GetFavoriteMovies(get())}
     single<MovieLocalDataSource> { MovieLocalDataSourceImpl()}
     single<MovieRemoteDataSource> { MovieRemoteDataSourceImpl(get()) }
     single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(), get(), get()) }
@@ -38,5 +41,6 @@ val modules = module {
 val viewModelModule = module {
 
     viewModel { MoviesViewModel(get(), get()) }
+    viewModel { FavoriteMoviesViewModel(get(), get()) }
 
 }
