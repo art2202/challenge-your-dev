@@ -9,18 +9,7 @@ import androidx.room.PrimaryKey
 //criado por arthur rodrigues
 
 @Entity(
-    tableName = "movie",
-    foreignKeys = [
-    ForeignKey(
-        entity = PhotoEntity::class,
-        parentColumns = arrayOf("photo_url"),
-        childColumns = arrayOf("photo_link")
-    ),
-    ForeignKey(
-        entity = LinkEntity::class,
-        parentColumns = arrayOf("critic_url"),
-        childColumns = arrayOf("critic_link")
-    )]
+    tableName = "movie"
 )
 data class MovieEntity(
 
@@ -39,10 +28,18 @@ data class MovieEntity(
     @ColumnInfo(name = "publication_date")
     val publicationDate : String,
 
-    @ColumnInfo(name = "photo_link", index = true)
+    @ColumnInfo(name = "photo_link")
     val photoUrl : String,
 
-    @ColumnInfo(name = "critic_link", index = true)
-    val criticLink : String
+    @ColumnInfo(name = "photo_width")
+    val photoWidth : Int,
 
+    @ColumnInfo(name = "photo_height")
+    val photoHeight : Int,
+
+    @ColumnInfo(name = "critic_link")
+    val criticLink : String,
+
+    @ColumnInfo(name = "suggested_text")
+    val suggestedText : String
 )

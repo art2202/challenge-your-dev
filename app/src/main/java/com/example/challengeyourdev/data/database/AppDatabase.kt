@@ -4,30 +4,23 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.challengeyourdev.core.App
-import com.example.challengeyourdev.data.database.dao.LinkDao
 import com.example.challengeyourdev.data.database.dao.MovieDao
-import com.example.challengeyourdev.data.database.dao.PhotoDao
-import com.example.challengeyourdev.data.database.entity.LinkEntity
 import com.example.challengeyourdev.data.database.entity.MovieEntity
-import com.example.challengeyourdev.data.database.entity.PhotoEntity
 
 
 @Database(
     entities = [
-        LinkEntity::class,
-        PhotoEntity::class,
         MovieEntity::class
     ],
     version = 1,
     exportSchema = false
 )
-
 abstract class AppDatabase : RoomDatabase() {
 
 
-    abstract fun linkDao() : LinkDao
-    abstract fun MovieDao() : MovieDao
-    abstract fun photoDao() : PhotoDao
+//    abstract fun linkDao() : LinkDao
+    abstract fun movieDao() : MovieDao
+//    abstract fun photoDao() : PhotoDao
 
     companion object {
         @Volatile

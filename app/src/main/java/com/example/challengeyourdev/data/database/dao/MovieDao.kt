@@ -1,5 +1,6 @@
 package com.example.challengeyourdev.data.database.dao
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -8,6 +9,7 @@ import com.example.challengeyourdev.data.database.entity.MovieEntity
 
 //criado por arthur rodrigues
 
+@Dao
 interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

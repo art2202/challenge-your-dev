@@ -9,9 +9,7 @@ import com.example.challengeyourdev.domain.entities.Movie
 
 class MovieLocalDataSourceImpl : MovieLocalDataSource {
 
-    private val movieDao = AppDatabase.getDatabase()!!.MovieDao()
-    private val photoDao = AppDatabase.getDatabase()!!.photoDao()
-    private val linkDao = AppDatabase.getDatabase()!!.linkDao()
+    private val movieDao = AppDatabase.getDatabase()!!.movieDao()
 
     override suspend fun addAllMovies(movies: List<Movie>) {
         TODO("Not yet implemented")

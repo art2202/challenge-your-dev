@@ -15,7 +15,10 @@ class MovieToMovieEntityMapper : Mapper<Movie, MovieEntity> {
             summaryShort,
             publicationDate,
             photo.photoUrl,
-            link.criticUrl
+            photo.width,
+            photo.height,
+            link.criticUrl,
+            link.suggestedText
         )
     }
 }
