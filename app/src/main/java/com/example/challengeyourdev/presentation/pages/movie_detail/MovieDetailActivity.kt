@@ -29,8 +29,16 @@ class MovieDetailActivity : AppCompatActivity() {
         tv_title.text = movie.movieTitle
         tv_date.text = movie.publicationDate
         tv_resume.text = movie.summaryShort
+        tv_author_critic.text = "Review by: ${movie.criticAuthor}"
+        tv_critic_resume.text = movie.link.suggestedText
+        iv_favorite.setImageResource(
+                if (movie.isFavorite)
+                    R.drawable.ic_star_white
+                else
+                    R.drawable.ic_star_border_white
+        )
         fab.setOnClickListener { sharedCritic(movie.link.criticUrl) }
-
+        bt_view_more.setOnClickListener { openChrome(movie.link.criticUrl) }
     }
 
     private fun sharedCritic(url : String){
