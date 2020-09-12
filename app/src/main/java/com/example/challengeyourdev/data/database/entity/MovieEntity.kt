@@ -16,6 +16,9 @@ data class MovieEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Int?,
 
+    @ColumnInfo(name = "movie_title")
+    val movieTitle : String,
+
     @ColumnInfo(name = "critic_author")
     val criticAuthor : String,
 
