@@ -46,7 +46,7 @@ class FavoriteMoviesActivity : AppCompatActivity() {
             val listOrder = arrayListOf<Movie>()
             listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
             if(moviesAdapter == null){
-                moviesAdapter = FavoriteMoviesAdapter(listOrder, ::onFavoriteClick)
+                moviesAdapter = FavoriteMoviesAdapter(this, listOrder, ::onFavoriteClick)
                 val layoutManager = LinearLayoutManager(this)
                 rv_movies.layoutManager = layoutManager
                 rv_movies.adapter = moviesAdapter
