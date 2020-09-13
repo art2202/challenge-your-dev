@@ -1,5 +1,6 @@
 package com.example.challengeyourdev.data.repositories
 
+import com.example.challengeyourdev.core.App
 import com.example.challengeyourdev.data.data_sources.MovieLocalDataSource
 import com.example.challengeyourdev.data.data_sources.MovieRemoteDataSource
 import com.example.challengeyourdev.data.mappers.MovieDataResponseToMovieMapper
@@ -21,10 +22,15 @@ class MovieRepositoryImpl(
 
     override suspend fun getAllMovies(page: Int): List<Movie> {
         val movieListLocal = localDataSource.getAllMovies()
-        if(movieListLocal.isEmpty() || page > 0){
-            val movieList = remoteDataSource.getAllMovies(page).results.map { movieDataResponseToMovieMapper.map(it) }
-            saveInDataBase(movieList)
+        try {
+            if ((movieListLocal.isEmpty() || page > 0) && App.temInternet) {
+                val movieList = remoteDataSource.getAllMovies(page).results.map {
+                    movieDataResponseToMovieMapper.map(it)
+                }
+                saveInDataBase(movieList)
+            }
         }
+        catch (e : Exception){}
         return localDataSource.getAllMovies().map { movieEntityToMovieMapper.map(it) }
     }
 
@@ -52,8 +58,14 @@ class MovieRepositoryImpl(
 
     override suspend fun getSearchMovies(title: String, page: Int): List<Movie> {
 
-        return remoteDataSource.getSearchMovies(title, page).results.map { movieDataResponseToMovieMapper.map(it) }
-
-
+        try {
+            if (App.temInternet) {
+                return remoteDataSource.getSearchMovies(title, page).results.map { movieDataResponseToMovieMapper.map(it) }
+            }
+            else
+                return localDataSource.getSearchMovies(title)?.map { movieEntityToMovieMapper.map(it) } ?: listOf()
+        }
+        catch (e : Exception){}
+        return localDataSource.getSearchMovies(title)?.map { movieEntityToMovieMapper.map(it) } ?: listOf()
     }
 }

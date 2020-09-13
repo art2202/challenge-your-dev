@@ -39,8 +39,20 @@ class MovieDetailActivity : AppCompatActivity() {
         tv_resume.text = movie.summaryShort
         tv_author_critic.text = "Review by: ${movie.criticAuthor} | ${dateFormat(movie.publicationDate)}"
         tv_critic_resume.text = movie.link.suggestedText
+        setImageFavorite(movie)
+        iv_favorite.setOnClickListener {
+            onFavoriteClick(movie)
+            movie.isFavorite = !movie.isFavorite
+            setImageFavorite(movie)
+        }
 
-        iv_favorite.setOnClickListener { onFavoriteClick(movie) }
+
+
+        fab.setOnClickListener { sharedCritic(movie.link.criticUrl) }
+        tv_view_more.setOnClickListener { openChrome(movie.link.criticUrl) }
+    }
+
+    private fun setImageFavorite(movie: Movie){
 
         iv_favorite.setImageResource(
             if (movie.isFavorite)
@@ -48,11 +60,7 @@ class MovieDetailActivity : AppCompatActivity() {
             else
                 R.drawable.ic_star_border_white
         )
-
-        fab.setOnClickListener { sharedCritic(movie.link.criticUrl) }
-        tv_view_more.setOnClickListener { openChrome(movie.link.criticUrl) }
     }
-
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)
     }

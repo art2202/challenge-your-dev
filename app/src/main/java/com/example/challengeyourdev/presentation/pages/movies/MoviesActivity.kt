@@ -106,4 +106,11 @@ class MoviesActivity : AppCompatActivity() {
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(moviesAdapter != null){
+            viewModel.getMovies()
+        }
+    }
 }
