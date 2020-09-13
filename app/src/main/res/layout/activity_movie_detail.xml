@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:background="@color/colorAccent"
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_left_arrow"
+                android:padding="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +37,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/iv_back"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
@@ -54,7 +63,7 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="22sp"
@@ -63,55 +72,51 @@
         app:layout_constraintTop_toBottomOf="@id/iv_picture"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="01/01/2020"
-        android:layout_marginLeft="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:layout_constraintLeft_toLeftOf="parent"/>
 
     <TextView
         android:id="@+id/tv_resume"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:layout_margin="10dp"
         android:text="resume"
-        android:lines="4"
-        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        android:lines="8"
+        app:layout_constraintTop_toBottomOf="@id/tv_author_critic"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        />
 
     <TextView
         android:id="@+id/tv_author_critic"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="author"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_resume"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintLeft_toLeftOf="parent"
         />
 
 
     <TextView
         android:id="@+id/tv_critic_resume"
-        android:layout_width="wrap_content"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="aaaaa"
+        android:text="read in"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_author_critic"
+        app:layout_constraintTop_toBottomOf="@id/tv_resume"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <Button
-        android:id="@+id/bt_view_more"
+    <TextView
+        android:id="@+id/tv_view_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="view more"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:text="@string/your_string_here"
         app:layout_constraintTop_toBottomOf="@id/tv_critic_resume"
         app:layout_constraintLeft_toLeftOf="parent"/>
 

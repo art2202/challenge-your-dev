@@ -25,6 +25,8 @@ class FavoriteMoviesActivity : AppCompatActivity() {
 
         viewModel.response().observe(this, Observer { response -> processResponse(response) })
         viewModel.getFavoriteMovies()
+
+        iv_back.setOnClickListener { onBackPressed() }
     }
 
     private fun processResponse(response : Response){

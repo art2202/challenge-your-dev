@@ -28,7 +28,8 @@ class FavoriteMoviesAdapter(
 
         holder.itemView.tv_title.text = item.movieTitle
         holder.itemView.tv_resume.text = item.summaryShort
-        Picasso.get().load(item.photo.photoUrl).into(holder.itemView.iv_poster)
+        if(item.photo.photoUrl.isNotEmpty())
+            Picasso.get().load(item.photo.photoUrl).resize(300, 400).into(holder.itemView.iv_poster)
         holder.itemView.tv_release_date.text = item.publicationDate
     }
 

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">challenge your dev</string>
+
+        <string name="your_string_here"><u>Click here to read</u>.</string>
 </resources>

@@ -34,7 +34,7 @@ class MoviesAdapter(
 
         holder.itemView.tv_title.text = item.movieTitle
         if(item.photo.photoUrl.isNotEmpty())
-            Picasso.get().load(item.photo.photoUrl).into(holder.itemView.iv_picture)
+            Picasso.get().load(item.photo.photoUrl).resize(350, 350).into(holder.itemView.iv_picture)
 
         holder.itemView.iv_fav.setOnClickListener {
             onFavoriteClick(item)
