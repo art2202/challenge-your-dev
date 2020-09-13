@@ -9,7 +9,7 @@ import com.example.challengeyourdev.data.database.entity.MovieEntity
 @Dao
 interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun add(movies : List<MovieEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

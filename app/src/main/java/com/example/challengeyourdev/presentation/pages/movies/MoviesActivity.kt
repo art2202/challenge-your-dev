@@ -93,6 +93,7 @@ class MoviesActivity : AppCompatActivity() {
 
     private fun getSearchMovies(){
         pg_loading.visibility = View.VISIBLE
+        rv_movies.visibility = View.GONE
         viewModel.resetCurrentPage()
         viewModel.getMovies(et_input.text.toString())
     }
@@ -103,6 +104,8 @@ class MoviesActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(moviesAdapter != null){
+            rv_movies.visibility = View.GONE
+            pg_loading.visibility = View.VISIBLE
             viewModel.getMovies(et_input.text.toString())
         }
     }

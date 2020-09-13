@@ -21,7 +21,6 @@ class MovieRepositoryImpl(
 ) : MovieRepository {
 
     override suspend fun getAllMovies(title: String,page: Int): List<Movie> {
-        val movieListLocal = localDataSource.getAllMovies(title)
         try {
             if (App.temInternet) {
                 val movieList = remoteDataSource.getAllMovies(title, page).results.map {
@@ -56,16 +55,4 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getSearchMovies(title: String, page: Int): List<Movie> {
-
-        try {
-            if (App.temInternet) {
-                return remoteDataSource.getSearchMovies(title, page).results.map { movieDataResponseToMovieMapper.map(it) }
-            }
-            else
-                return localDataSource.getSearchMovies(title)?.map { movieEntityToMovieMapper.map(it) } ?: listOf()
-        }
-        catch (e : Exception){}
-        return localDataSource.getSearchMovies(title)?.map { movieEntityToMovieMapper.map(it) } ?: listOf()
-    }
 }
