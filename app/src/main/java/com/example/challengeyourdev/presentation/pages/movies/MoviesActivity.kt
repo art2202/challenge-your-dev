@@ -55,7 +55,6 @@ class MoviesActivity : AppCompatActivity() {
         rv_movies.visibility = View.VISIBLE
 
         if(data is List<*>){
-            data.size
             if(moviesAdapter == null){
                 moviesAdapter = MoviesAdapter(this, data as ArrayList<Movie>, ::onFavoriteClick)
                 val layoutManager = GridLayoutManager(this, 2)
