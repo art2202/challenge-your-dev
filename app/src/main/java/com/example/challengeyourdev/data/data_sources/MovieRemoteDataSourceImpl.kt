@@ -10,8 +10,8 @@ import com.example.challengeyourdev.data.models.ResultApiDataResponse
 //criado por arthur rodrigues
 
 class MovieRemoteDataSourceImpl(private val movieApi : ApiService) : MovieRemoteDataSource {
-    override suspend fun getAllMovies(page: Int): ResultApiDataResponse {
-        val response = movieApi.getAllMovies("reviews/search.json?offset=${page}&api-key=${BuildConfig.API_KEY}")
+    override suspend fun getAllMovies(title: String,page: Int): ResultApiDataResponse {
+        val response = movieApi.getAllMovies("reviews/search.json?offset=${page}&query=${title}&api-key=${BuildConfig.API_KEY}")
         when {
             response.isSuccessful -> {
                 return response.body()!!
@@ -27,8 +27,7 @@ class MovieRemoteDataSourceImpl(private val movieApi : ApiService) : MovieRemote
     }
 
     override suspend fun getSearchMovies(title: String, page: Int): ResultApiDataResponse {
-        val response =
-            movieApi.getAllMovies("reviews/search.json?offset=${page}&query=${title}&api-key=${BuildConfig.API_KEY}")
+        val response = movieApi.getAllMovies("reviews/search.json?offset=${page}&query=${title}&api-key=${BuildConfig.API_KEY}")
         when {
             response.isSuccessful -> {
                 return response.body()!!

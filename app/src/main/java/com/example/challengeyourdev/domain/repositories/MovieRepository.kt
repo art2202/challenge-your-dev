@@ -7,7 +7,7 @@ import com.example.challengeyourdev.domain.entities.Movie
 
 interface MovieRepository {
 
-    suspend fun getAllMovies(page: Int): List<Movie>
+    suspend fun getAllMovies(title: String,page: Int): List<Movie>
     suspend fun saveInDataBase(movies : List<Movie>)
     suspend fun getFavoriteMovies() : List<Movie>
     suspend fun favoriteOrDisfavorMovie(movie: Movie)

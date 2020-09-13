@@ -18,8 +18,11 @@ class MovieLocalDataSourceImpl() : MovieLocalDataSource {
         movieDao.addOneMovie(movie)
     }
 
-    override suspend fun getAllMovies(): List<MovieEntity> {
-        return movieDao.getAllMovies()
+    override suspend fun getAllMovies(title: String): List<MovieEntity> {
+        if(title.isEmpty())
+            return movieDao.getAllMovies()
+        else
+            return movieDao.getSearchMovies(title)
     }
 
     override suspend fun getFavoriteMovies(): List<MovieEntity>? {

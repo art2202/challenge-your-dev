@@ -20,18 +20,18 @@ class MovieRepositoryImpl(
     private val movieDataResponseToMovieMapper: MovieDataResponseToMovieMapper
 ) : MovieRepository {
 
-    override suspend fun getAllMovies(page: Int): List<Movie> {
-        val movieListLocal = localDataSource.getAllMovies()
+    override suspend fun getAllMovies(title: String,page: Int): List<Movie> {
+        val movieListLocal = localDataSource.getAllMovies(title)
         try {
-            if ((movieListLocal.isEmpty() || page > 0) && App.temInternet) {
-                val movieList = remoteDataSource.getAllMovies(page).results.map {
+            if (App.temInternet) {
+                val movieList = remoteDataSource.getAllMovies(title, page).results.map {
                     movieDataResponseToMovieMapper.map(it)
                 }
                 saveInDataBase(movieList)
             }
         }
         catch (e : Exception){}
-        return localDataSource.getAllMovies().map { movieEntityToMovieMapper.map(it) }
+        return localDataSource.getAllMovies(title).map { movieEntityToMovieMapper.map(it) }
     }
 
     override suspend fun saveInDataBase(movies: List<Movie>) {

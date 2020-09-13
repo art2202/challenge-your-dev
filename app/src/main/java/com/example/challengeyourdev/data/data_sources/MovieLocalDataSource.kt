@@ -9,7 +9,7 @@ interface MovieLocalDataSource {
 
     suspend fun addAllMovies(movies : List<MovieEntity>)
     suspend fun addMovieFavorite(movie: MovieEntity)
-    suspend fun getAllMovies() : List<MovieEntity>
+    suspend fun getAllMovies(title: String) : List<MovieEntity>
     suspend fun getFavoriteMovies() : List<MovieEntity>?
     suspend fun getSearchMovies(title : String) : List<MovieEntity>?
 }

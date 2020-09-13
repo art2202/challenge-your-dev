@@ -30,9 +30,8 @@ class MoviesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movies)
 
         viewModel.response().observe(this, Observer { response -> processResponse(response) })
-        viewModel.searchResponse().observe(this, Observer { response -> processSearchResponse(response) })
 
-        viewModel.getMovies()
+        viewModel.getMovies(et_input.text.toString())
 
         ic_bookmark.setOnClickListener {
             intent = Intent(this, FavoriteMoviesActivity::class.java)
@@ -50,13 +49,6 @@ class MoviesActivity : AppCompatActivity() {
         }
     }
 
-    private fun processSearchResponse(response : Response){
-        val searchList = response.data as ArrayList<Movie>
-        pg_loading.visibility = View.GONE
-        rv_movies.adapter = MoviesAdapter(this, searchList, ::onFavoriteClick)
-
-    }
-
     private fun showMovies(data : Any?) {
 
         pg_loading.visibility = View.GONE
@@ -70,7 +62,7 @@ class MoviesActivity : AppCompatActivity() {
                 rv_movies.layoutManager = layoutManager
                 rv_movies.addOnScrollListener(
                     InfiniteScrollListener({
-                        viewModel.loadMoreMovies()
+                        viewModel.loadMoreMovies(et_input.text.toString())
                     }, layoutManager)
                 )
                 rv_movies.adapter = moviesAdapter
@@ -101,7 +93,8 @@ class MoviesActivity : AppCompatActivity() {
 
     private fun getSearchMovies(){
         pg_loading.visibility = View.VISIBLE
-        viewModel.getSearchMovies(et_input.text.toString())
+        viewModel.resetCurrentPage()
+        viewModel.getMovies(et_input.text.toString())
     }
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)
@@ -110,7 +103,7 @@ class MoviesActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(moviesAdapter != null){
-            viewModel.getMovies()
+            viewModel.getMovies(et_input.text.toString())
         }
     }
 }

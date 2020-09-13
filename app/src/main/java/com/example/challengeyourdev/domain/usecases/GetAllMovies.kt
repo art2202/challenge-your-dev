@@ -8,5 +8,5 @@ import com.example.challengeyourdev.domain.repositories.MovieRepository
 
 class GetAllMovies(private val movieRepository: MovieRepository) {
 
-    suspend operator fun invoke(page: Int): List<Movie> = movieRepository.getAllMovies(page)
+    suspend operator fun invoke(title : String, page: Int): List<Movie> = movieRepository.getAllMovies(title, page)
 }

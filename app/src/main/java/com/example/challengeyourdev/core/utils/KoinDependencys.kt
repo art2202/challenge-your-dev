@@ -14,7 +14,6 @@ import com.example.challengeyourdev.domain.repositories.MovieRepository
 import com.example.challengeyourdev.domain.usecases.FavoriteOrDisfavorMovie
 import com.example.challengeyourdev.domain.usecases.GetAllMovies
 import com.example.challengeyourdev.domain.usecases.GetFavoriteMovies
-import com.example.challengeyourdev.domain.usecases.GetSearchMovies
 import com.example.challengeyourdev.presentation.pages.favorite_movies.FavoriteMoviesViewModel
 import com.example.challengeyourdev.presentation.pages.movie_detail.MovieDetailViewModel
 import com.example.challengeyourdev.presentation.pages.movies.MoviesViewModel
@@ -35,7 +34,6 @@ val modules = module {
     single { GetAllMovies(get()) }
     single { FavoriteOrDisfavorMovie(get())}
     single {GetFavoriteMovies(get())}
-    single { GetSearchMovies(get()) }
     single<MovieLocalDataSource> { MovieLocalDataSourceImpl()}
     single<MovieRemoteDataSource> { MovieRemoteDataSourceImpl(get()) }
     single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(), get(), get()) }
@@ -43,7 +41,7 @@ val modules = module {
 
 val viewModelModule = module {
 
-    viewModel { MoviesViewModel(get(), get(), get()) }
+    viewModel { MoviesViewModel(get(), get()) }
     viewModel { FavoriteMoviesViewModel(get(), get()) }
     viewModel { MovieDetailViewModel(get()) }
 
