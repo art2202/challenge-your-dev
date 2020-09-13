@@ -16,6 +16,7 @@ import com.example.challengeyourdev.domain.usecases.GetAllMovies
 import com.example.challengeyourdev.domain.usecases.GetFavoriteMovies
 import com.example.challengeyourdev.domain.usecases.GetSearchMovies
 import com.example.challengeyourdev.presentation.pages.favorite_movies.FavoriteMoviesViewModel
+import com.example.challengeyourdev.presentation.pages.movie_detail.MovieDetailViewModel
 import com.example.challengeyourdev.presentation.pages.movies.MoviesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -44,5 +45,6 @@ val viewModelModule = module {
 
     viewModel { MoviesViewModel(get(), get(), get()) }
     viewModel { FavoriteMoviesViewModel(get(), get()) }
+    viewModel { MovieDetailViewModel(get()) }
 
 }

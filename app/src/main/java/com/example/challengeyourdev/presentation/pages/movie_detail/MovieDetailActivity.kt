@@ -4,17 +4,19 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import androidx.appcompat.app.AppCompatActivity
 import com.example.challengeyourdev.R
 import com.example.challengeyourdev.core.utils.DateFormatUtils
 import com.example.challengeyourdev.domain.entities.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MovieDetailActivity : AppCompatActivity() {
+
+    private val viewModel : MovieDetailViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
@@ -38,6 +40,8 @@ class MovieDetailActivity : AppCompatActivity() {
         tv_author_critic.text = "Review by: ${movie.criticAuthor} | ${dateFormat(movie.publicationDate)}"
         tv_critic_resume.text = movie.link.suggestedText
 
+        iv_favorite.setOnClickListener { onFavoriteClick(movie) }
+
         iv_favorite.setImageResource(
             if (movie.isFavorite)
                 R.drawable.ic_star_white
@@ -47,6 +51,10 @@ class MovieDetailActivity : AppCompatActivity() {
 
         fab.setOnClickListener { sharedCritic(movie.link.criticUrl) }
         tv_view_more.setOnClickListener { openChrome(movie.link.criticUrl) }
+    }
+
+    private fun onFavoriteClick(movie: Movie) {
+        viewModel.favoriteOrDisfavorMovie(movie)
     }
 
     private fun sharedCritic(url: String){

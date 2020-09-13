@@ -53,7 +53,6 @@ class MoviesActivity : AppCompatActivity() {
     private fun processSearchResponse(response : Response){
         val searchList = response.data as ArrayList<Movie>
         pg_loading.visibility = View.GONE
-        rv_movies.adapter = MoviesAdapter(this, arrayListOf(), ::onFavoriteClick)
         rv_movies.adapter = MoviesAdapter(this, searchList, ::onFavoriteClick)
 
     }

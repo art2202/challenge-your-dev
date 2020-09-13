@@ -45,12 +45,11 @@ class FavoriteMoviesActivity : AppCompatActivity() {
             data.size
             val listOrder = arrayListOf<Movie>()
             listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
-            if(moviesAdapter == null){
-                moviesAdapter = FavoriteMoviesAdapter(this, listOrder, ::onFavoriteClick)
-                val layoutManager = LinearLayoutManager(this)
-                rv_movies.layoutManager = layoutManager
-                rv_movies.adapter = moviesAdapter
-            }
+            moviesAdapter = FavoriteMoviesAdapter(this, listOrder, ::onFavoriteClick)
+            val layoutManager = LinearLayoutManager(this)
+            rv_movies.layoutManager = layoutManager
+            rv_movies.adapter = moviesAdapter
+
         }
     }
 
@@ -74,5 +73,12 @@ class FavoriteMoviesActivity : AppCompatActivity() {
 
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(moviesAdapter != null) {
+            viewModel.getFavoriteMovies()
+        }
     }
 }
