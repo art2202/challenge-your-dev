@@ -47,12 +47,13 @@ dependencies {
     /* Picasso */
     implementation "com.squareup.picasso:picasso:2.71828"
 
-    //    request
+    /*  request */
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
     implementation "com.squareup.okhttp3:okhttp:4.6.0"
 
+    /* lifecycle */
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
@@ -65,10 +66,13 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
 
 
-//    room
+    /* room */
     implementation "androidx.room:room-runtime:2.2.5"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor "androidx.room:room-compiler:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
+
+    testImplementation "io.mockk:mockk:1.9.3"
+
 }

@@ -34,7 +34,7 @@ class MovieDetailActivity : AppCompatActivity() {
         val dateFormat = DateFormatUtils()
 
         if(movie.photo.photoUrl.isNotEmpty())
-            Picasso.get().load(movie.photo.photoUrl).resize(1100, 600).into(iv_picture)
+            Picasso.get().load(movie.photo.photoUrl).fit().into(iv_picture)
         tv_title.text = movie.movieTitle
         tv_resume.text = movie.summaryShort
         tv_author_critic.text = "Review by: ${movie.criticAuthor} | ${dateFormat(movie.publicationDate)}"
