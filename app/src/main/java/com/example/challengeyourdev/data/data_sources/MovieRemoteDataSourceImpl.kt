@@ -25,4 +25,21 @@ class MovieRemoteDataSourceImpl(private val movieApi : ApiService) : MovieRemote
             else -> throw Throwable()
         }
     }
+
+    override suspend fun getSearchMovies(title: String, page: Int): ResultApiDataResponse {
+        val response =
+            movieApi.getAllMovies("reviews/search.json?offset=${page}&query=${title}&api-key=${BuildConfig.API_KEY}")
+        when {
+            response.isSuccessful -> {
+                return response.body()!!
+            }
+            response.code() == 401 -> {
+                throw InvalidApiKeyThrowable()
+            }
+            response.code() == 404 -> {
+                throw ResourceNotFoundThrowable()
+            }
+            else -> throw Throwable()
+        }
+    }
 }

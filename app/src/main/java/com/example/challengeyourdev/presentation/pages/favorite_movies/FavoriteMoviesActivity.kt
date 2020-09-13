@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challengeyourdev.R
 import com.example.challengeyourdev.core.utils.Response
 import com.example.challengeyourdev.core.utils.Status
 import com.example.challengeyourdev.domain.entities.Movie
-import com.example.challengeyourdev.presentation.pages.movies.MoviesAdapter
-import com.example.challengeyourdev.presentation.widgets.InfiniteScrollListener
-import kotlinx.android.synthetic.main.activity_movies.*
+import kotlinx.android.synthetic.main.activity_favorite_movies.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @Suppress("UNCHECKED_CAST")

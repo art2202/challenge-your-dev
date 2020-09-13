@@ -8,4 +8,5 @@ import com.example.challengeyourdev.data.models.ResultApiDataResponse
 interface MovieRemoteDataSource {
 
     suspend fun getAllMovies(page: Int): ResultApiDataResponse
+    suspend fun getSearchMovies(title : String, page : Int) : ResultApiDataResponse
 }

@@ -6,6 +6,7 @@ import com.example.challengeyourdev.core.utils.Response
 import com.example.challengeyourdev.domain.entities.Movie
 import com.example.challengeyourdev.domain.usecases.FavoriteOrDisfavorMovie
 import com.example.challengeyourdev.domain.usecases.GetAllMovies
+import com.example.challengeyourdev.domain.usecases.GetSearchMovies
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,12 +16,15 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel(
     val getAllMoviesUseCase: GetAllMovies,
-    val favoriteOrDisfavorMovieUseCase: FavoriteOrDisfavorMovie
+    val favoriteOrDisfavorMovieUseCase: FavoriteOrDisfavorMovie,
+    val getSearchMoviesUseCase: GetSearchMovies
 ) : ViewModel() {
 
     private val response = MutableLiveData<Response>()
-    private var currentPage = 0
+    private val searchResponse = MutableLiveData<Response>()
 
+    private var currentPage = 0
+    private var currentPageSearch = 0
 
     fun getMovies(){
         response.postValue(Response.loading())
@@ -37,6 +41,13 @@ class MoviesViewModel(
 
     }
 
+    fun getSearchMovies(title : String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = getSearchMoviesUseCase(title, currentPageSearch)
+            searchResponse.postValue(Response.success(result))
+        }
+    }
+
     fun favoriteOrDisfavorMovie(movie : Movie){
         CoroutineScope(Dispatchers.IO).launch {
             favoriteOrDisfavorMovieUseCase(movie)
@@ -46,6 +57,11 @@ class MoviesViewModel(
     fun loadMoreMovies(){
         currentPage += 20
         getMovies()
+    }
+
+
+    fun searchResponse(): MutableLiveData<Response> {
+        return searchResponse
     }
 
     fun response(): MutableLiveData<Response> {

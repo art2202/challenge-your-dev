@@ -41,15 +41,19 @@ class MovieRepositoryImpl(
             movieEntityToMovieMapper.map(it)} ?: arrayListOf()) as ArrayList<Movie>
 
         if(favoriteMovies.find { movie.movieTitle == it.movieTitle } == null){
-            println("null")
             movie.isFavorite = true
             localDataSource.addMovieFavorite(movieToMovieEntityMapper.map(movie))
         }
         else {
-            println("nao null")
             movie.isFavorite = false
             localDataSource.addMovieFavorite(movieToMovieEntityMapper.map(movie))
         }
+    }
+
+    override suspend fun getSearchMovies(title: String, page: Int): List<Movie> {
+
+        return remoteDataSource.getSearchMovies(title, page).results.map { movieDataResponseToMovieMapper.map(it) }
+
 
     }
 }

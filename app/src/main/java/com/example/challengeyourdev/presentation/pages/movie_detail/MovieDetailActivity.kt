@@ -25,7 +25,8 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun setDateInScreen(movie: Movie){
 
-        Picasso.get().load(movie.photo.photoUrl).resize(600, 400).into(iv_picture)
+        if(movie.photo.photoUrl.isNotEmpty())
+            Picasso.get().load(movie.photo.photoUrl).resize(600, 400).into(iv_picture)
         tv_title.text = movie.movieTitle
         tv_date.text = movie.publicationDate
         tv_resume.text = movie.summaryShort

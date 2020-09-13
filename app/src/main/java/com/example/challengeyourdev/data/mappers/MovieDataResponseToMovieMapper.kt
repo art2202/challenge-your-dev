@@ -1,6 +1,7 @@
 package com.example.challengeyourdev.data.mappers
 
 import com.example.challengeyourdev.data.models.MovieDataResponse
+import com.example.challengeyourdev.data.models.PhotoDataResponse
 import com.example.challengeyourdev.domain.entities.Movie
 
 
@@ -15,7 +16,7 @@ class MovieDataResponseToMovieMapper : Mapper<MovieDataResponse, Movie>{
             summary_short ?: "",
             publication_date ?: "",
             link?.toEntity()!!,
-            multimedia?.toEntity()!!
+            multimedia?.toEntity() ?: PhotoDataResponse(null, null, null, null).toEntity()
         )
     }
 }

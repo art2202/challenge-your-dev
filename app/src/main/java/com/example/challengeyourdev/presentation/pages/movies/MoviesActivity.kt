@@ -30,12 +30,16 @@ class MoviesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movies)
 
         viewModel.response().observe(this, Observer { response -> processResponse(response) })
+        viewModel.searchResponse().observe(this, Observer { response -> processSearchResponse(response) })
+
         viewModel.getMovies()
 
         ic_bookmark.setOnClickListener {
             intent = Intent(this, FavoriteMoviesActivity::class.java)
             startActivity(intent)
         }
+
+        iv_search.setOnClickListener { getSearchMovies() }
     }
 
     private fun processResponse(response : Response){
@@ -46,6 +50,14 @@ class MoviesActivity : AppCompatActivity() {
         }
     }
 
+    private fun processSearchResponse(response : Response){
+        val searchList = response.data as ArrayList<Movie>
+        pg_loading.visibility = View.GONE
+        rv_movies.adapter = MoviesAdapter(this, arrayListOf(), ::onFavoriteClick)
+        rv_movies.adapter = MoviesAdapter(this, searchList, ::onFavoriteClick)
+
+    }
+
     private fun showMovies(data : Any?) {
 
         pg_loading.visibility = View.GONE
@@ -53,10 +65,8 @@ class MoviesActivity : AppCompatActivity() {
 
         if(data is List<*>){
             data.size
-            val listOrder = arrayListOf<Movie>()
-            listOrder.addAll((data as ArrayList<Movie>).sortedByDescending { it.isFavorite })
             if(moviesAdapter == null){
-                moviesAdapter = MoviesAdapter(this, listOrder, ::onFavoriteClick)
+                moviesAdapter = MoviesAdapter(this, data as ArrayList<Movie>, ::onFavoriteClick)
                 val layoutManager = GridLayoutManager(this, 2)
                 rv_movies.layoutManager = layoutManager
                 rv_movies.addOnScrollListener(
@@ -67,7 +77,7 @@ class MoviesActivity : AppCompatActivity() {
                 rv_movies.adapter = moviesAdapter
             }
             else{
-                moviesAdapter?.setList(data)
+                moviesAdapter?.setList(data as ArrayList<Movie>)
             }
         }
     }
@@ -88,6 +98,11 @@ class MoviesActivity : AppCompatActivity() {
             rv_movies.visibility = View.GONE
             ll_error.visibility = View.GONE
         }
+    }
+
+    private fun getSearchMovies(){
+        pg_loading.visibility = View.VISIBLE
+        viewModel.getSearchMovies(et_input.text.toString())
     }
     private fun onFavoriteClick(movie: Movie) {
         viewModel.favoriteOrDisfavorMovie(movie)

@@ -11,5 +11,6 @@ interface MovieRepository {
     suspend fun saveInDataBase(movies : List<Movie>)
     suspend fun getFavoriteMovies() : List<Movie>
     suspend fun favoriteOrDisfavorMovie(movie: Movie)
+    suspend fun getSearchMovies(title : String, page: Int) : List<Movie>
 
 }

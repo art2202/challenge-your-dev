@@ -26,4 +26,8 @@ class MovieLocalDataSourceImpl() : MovieLocalDataSource {
         return movieDao.getFavoriteMovies()
     }
 
+    override suspend fun getSearchMovies(title: String): List<MovieEntity>? {
+        return movieDao.getSearchMovies(title)
+    }
+
 }
